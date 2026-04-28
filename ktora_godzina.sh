@@ -10,4 +10,4 @@ h_left=$((h_end-h_now-1))
 m_left=$((60-$m_now))
 
 echo "Jest godzina: $h_now:$m_now !"
-echo "Do końca szychty zostało: x:y"
+echo "Do końca szychty zostało: $h_left h $m_left min"
