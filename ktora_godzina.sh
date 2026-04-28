@@ -4,4 +4,5 @@
 godzina="$(($(date +%H)+2)):$(date +%M)"
 
 echo "Jest godzina: $godzina !"
-eche "test zdalnego repo"
+echo "test zdalnego repo"
+echo "test2"
