@@ -21,6 +21,16 @@
 
 
 
+typ="osobowe"
+
+if [ "$1" = "-c" ] 
+then
+ typ="ciezarowe"
+elif [ -n "$1" ] && [ "$1" != "-o" ]
+then
+    echo "Nie poprawny argument typu pojazdu" 1>&2
+    exit 1
+fi
 
 read -p "Podaj markę samochodu: " marka
 read -p "Podaj model samochodu: " model
@@ -28,6 +38,12 @@ read -p "Podaj rocznik samochodu: " rocznik
 read -p "Podaj numer rejestracyjny samochodu: " nr_rej
 read -p "Podaj datę ostatniego przeglądu i przebieg samochodu: (DD:MM:YYYY) " data_przegladu przebieg
 
+dir_path="$HOME/Baza_Pojazdow/$typ/$marka"
+
+if ! [ -d $dir_path ]
+then
+  mkdir -p $dir_path
+fi
 
 echo "-------------- CAR PASSPORT ----------------- 
 Marka: $marka
@@ -36,5 +52,5 @@ Rocznik: $rocznik
 Numer rejestracyjny: $nr_rej
 Data ostatniego przegladu: $data_przegladu
 Przebieg na ostatnim przeglądzie: $przebieg km 
-Ostatnia aktualizacja odbyła się $(date +%d.%m.%Y\ %X) przez $USER > $nr_rej.pc
+Ostatnia aktualizacja odbyła się $(date +%d.%m.%Y\ %X) przez $USER" > $dir_path/$nr_rej.pc
 
