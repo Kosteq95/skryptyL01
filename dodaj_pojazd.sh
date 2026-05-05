@@ -53,10 +53,11 @@ fi
 
 #read -p "Podaj markę samochodu: " marka
 marka=$(pobierz_dane "markę")
-read -p "Podaj model samochodu: " model
-read -p "Podaj rocznik samochodu: " rocznik
-read -p "Podaj numer rejestracyjny samochodu: " nr_rej
-read -p "Podaj datę ostatniego przeglądu i przebieg samochodu: (DD:MM:YYYY) " data_przegladu przebieg
+model=$(pobierz_dane "model")
+rocznik=$(pobierz_dane "rocznik")
+nr_rej=$(pobierz_dane "numer rejestracyjny")
+data_przegladu=$(pobierz_dane "datę przegladu")
+przebieg=$(pobierz_dane "przebieg")
 
 dir_path="$HOME/Baza_Pojazdow/$typ/$marka"
 
