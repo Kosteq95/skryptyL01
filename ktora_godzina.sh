@@ -37,10 +37,10 @@ fi
 h_now=$(($(date +%H)+2))
 m_now=$(date +%M)
 
-if [ $h_end -lt $h_now ]
-then
-  h_end=$((h_end+24))
-fi
+#if [ $h_end -lt $h_now ]
+#then
+#  h_end=$((h_end+24))
+#fi
 
 if [ $m_end -lt $m_now ]
 then
@@ -50,6 +50,12 @@ fi
 
 h_left=$((h_end-h_now))
 m_left=$((m_end-m_now))
+
+if [ $h_left -lt 0 ]
+then
+ h_left=$((h_left+24))
+
+fi
 
 echo "Jest godzina: $h_now:$m_now !"
 echo "Do końca szychty zostało: $h_left h $m_left min"
