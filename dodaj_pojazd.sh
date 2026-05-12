@@ -19,6 +19,8 @@
 # Przebieg na ostatnim przeglądzie: ...... km 
 # Ostania aktualizacja odbyła się DD.MM.YYYY HH:MM:SS przez "nazwa użytkownika systemu"
 
+set -e
+
 function pobierz_dane
 {
     licznik=0
@@ -31,7 +33,7 @@ function pobierz_dane
         if [ $licznik -gt 3 ]
         then
             echo "Nie podałeś wymaganych danych" 1>&2
-            kill -term $$ 
+            exit 2
         fi
     done
     
@@ -55,6 +57,14 @@ fi
 marka=$(pobierz_dane "markę")
 model=$(pobierz_dane "model")
 rocznik=$(pobierz_dane "rocznik")
+
+while [ $rocznik -lt 1884 ] || [ $rocznik -gt $(date +%Y) ]
+do
+    echo "Takie auto nie może istnieć podaj rocznik z zakresy 1884 do $(date +%Y)"
+done
+
+
+
 nr_rej=$(pobierz_dane "numer rejestracyjny")
 data_przegladu=$(pobierz_dane "datę przegladu")
 przebieg=$(pobierz_dane "przebieg")
