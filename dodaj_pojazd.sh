@@ -75,10 +75,25 @@ do
     fi
 done
 
-
-
 nr_rej=$(pobierz_dane "numer rejestracyjny")
-data_przegladu=$(pobierz_dane "datę przegladu")
+
+isok=0
+while [ $isok -eq 0 ]
+do
+    data_przegladu=$(pobierz_dane "datę przegladu")
+    # DD.MM.YYYY
+    dzien=$(echo $data_przegladu | cut -d "." -f 1)
+    miesiac=$(echo $data_przegladu | cut -d "." -f 2)
+    rok=$(echo $data_przegladu | cut -d "." -f 3)
+
+    if [ $dzien -lt 0 ] || [ $dzien -gt 31 ] || [ $miesiac -lt 0 ] || [ $miesiac -gt 12 ] || [ $rok -lt $(($(date +%Y)-20)) ] || [ $rok -gt $(date +%Y) ] || ( [ $dzien -gt 30 ] && [[ $miesiac == [0][469] ]] )
+    then
+    echo "nie poprawna data"
+    else
+    isok=1
+    fi 
+done
+
 przebieg=$(pobierz_dane "przebieg")
 
 dir_path="$HOME/Baza_Pojazdow/$typ/$marka"
