@@ -27,7 +27,7 @@ function pobierz_dane
 
     while [ -z "$dana" ]
     do
-        read -p "Podaj $1 samochodu" dana
+        read -p "Podaj $1 samochodu: " dana
         licznik=$((licznik+1))
 
         if [ $licznik -gt 3 ]
@@ -56,11 +56,23 @@ fi
 #read -p "Podaj markę samochodu: " marka
 marka=$(pobierz_dane "markę")
 model=$(pobierz_dane "model")
-rocznik=$(pobierz_dane "rocznik")
 
-while [ $rocznik -lt 1884 ] || [ $rocznik -gt $(date +%Y) ]
+isok=0
+while [ $isok -eq 0 ]
 do
-    echo "Takie auto nie może istnieć podaj rocznik z zakresy 1884 do $(date +%Y)"
+    rocznik=$(pobierz_dane "rocznik")
+    set +e
+    zmienna=$(echo "$rocznik" | grep -icE "[A-Z]")
+    set -e
+    if [ $zmienna -eq 1 ]
+    then 
+        echo "Pozadno tekst zamiast roku!"
+    elif [ $rocznik -lt 1884 ] || [ $rocznik -gt $(date +%Y) ]
+    then
+        echo "Takie auto nie może istnieć podaj rocznik z zakresy 1884 do $(date +%Y)"
+    else
+        isok=1
+    fi
 done
 
 
