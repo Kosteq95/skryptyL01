@@ -88,9 +88,9 @@ do
 
     if [ $dzien -lt 0 ] || [ $dzien -gt 31 ] || [ $miesiac -lt 0 ] || [ $miesiac -gt 12 ] || [ $rok -lt $(($(date +%Y)-20)) ] || [ $rok -gt $(date +%Y) ] || ( [ $dzien -gt 30 ] && [[ $miesiac == [0][469] ]] )
     then
-    echo "nie poprawna data"
+        echo "nie poprawna data"
     else
-    isok=1
+        isok=1
     fi 
 done
 
@@ -110,5 +110,5 @@ Rocznik: $rocznik
 Numer rejestracyjny: $nr_rej
 Data ostatniego przegladu: $data_przegladu
 Przebieg na ostatnim przeglądzie: $przebieg km 
-Ostatnia aktualizacja odbyła się $(date +%d.%m.%Y\ %X) przez $USER" > $dir_path/$nr_rej.pc
+Ostatnia aktualizacja odbyła się $(date +%d.%m.%Y\ %X) przez $USER" > "$dir_path/$nr_rej.pc"
 
